@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  transition: 0.5s;
+}
+
+.app {
+  width: 340px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#clock {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* SEARCH */
+.search {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.search input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+/* BUTTON CHUNG */
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 500;
+}
+
+/* SEARCH BUTTON */
+.search button {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 10px 14px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* HOVER */
+.search button:hover {
+  background: rgba(255,255,255,0.35);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* CLICK */
+.search button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* INPUT đẹp hơn cho hợp vibe */
+.search input {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+}
+
+.search input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* QUICK CITY BUTTON */
+.city-btn {
+  margin: 5px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+/* hover city */
+.city-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+/* click city */
+.city-btn:active {
+  transform: scale(0.95);
+}
+
+/* thêm hiệu ứng glow nhẹ */
+.city-btn.active {
+  background: rgba(255,255,255,0.5);
+  color: black;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+#icon {
+  width: 100px;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+#temp {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+/* FORECAST */
+.forecast {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.forecast-item {
+  min-width: 80px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.forecast-item img {
+  width: 50px;
+}
+
+.time {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* BACKGROUND */
+body.sunny {
+  background: linear-gradient(to right, #fceabb, #f8b500);
+}
+
+body.night {
+  background: linear-gradient(to right, #141e30, #243b55);
+}
+
+body.cloudy {
+  background: linear-gradient(to right, #4b79a1, #283e51);
+}
+
+body.rainy {
+  background: linear-gradient(to right, #314755, #26a0da);
+}
+
+body.storm {
+  background: linear-gradient(to right, #232526, #414345);
+}
+
+/* RAIN EFFECT */
+.rain-effect {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.3) 3px
+  );
+  animation: rain 0.3s linear infinite;
+}
+
+@keyframes rain {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}
