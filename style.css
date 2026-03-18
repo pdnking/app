@@ -32,27 +32,27 @@ body::after {
 
 /* ===== BACKGROUND THEO THỜI TIẾT ===== */
 body.sunny {
-  background-image: url("/anh/nang.png");
+  background-image: url("anh/nang.png");
 }
 
 body.partly {
-  background-image: url("/anh/nang.png");
+  background-image: url("anh/nang.png");
 }
 
 body.cloudy {
-  background-image: url("/anh/may.png");
+  background-image: url("anh/may.png");
 }
 
 body.rainy {
-  background-image: url("/anh/anh-mua-1.jpg");
+  background-image: url("anh/anh-mua-1.jpg");
 }
 
 body.storm {
-  background-image: url("/anh/bao.jpg");
+  background-image: url("anh/bao.jpg");
 }
 
 body.night {
-  background-image: url("/anh/dem.png");
+  background-image: url("anh/dem.png");
 }
 
 /* ===== APP ===== */
