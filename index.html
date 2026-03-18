@@ -1,52 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
+  <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather App</title>
 
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+  <body>
+  
+    <div class="app">
+      <h1>🌦️ Thời Tiết Việt Nam</h1>
 
-<div class="app">
-  <h1>🌦️ Thời Tiết Việt Nam</h1>
+      <!-- Clock -->
+      <div id="clock">--:--:--</div>
 
-  <!-- Clock -->
-  <div id="clock">--:--:--</div>
+      <!-- Search -->
+      <div class="search">
+        <input type="text" id="city" placeholder="Nhập thành phố..." />
+        <button id="searchBtn">🔍</button>
+        <button id="locationBtn">📍</button>
+      </div>
 
-  <!-- Search -->
-  <div class="search">
-    <input type="text" id="city" placeholder="Nhập thành phố..." />
-    <button id="searchBtn">🔍</button>
-    <button id="locationBtn">📍</button>
-  </div>
+      <!-- Quick cities -->
+      <div class="quick">
+        <button class="city-btn" data-city="Hanoi">Hà Nội</button>
+        <button class="city-btn" data-city="Haiphong">Hải Phòng</button>
+        <button class="city-btn" data-city="Ho Chi Minh City">TP HCM</button>
+        <button class="city-btn" data-city="Hai Duong">Hải Dương</button>
+      </div>
 
-  <!-- Quick cities -->
-  <div class="quick">
-    <button class="city-btn" data-city="Hanoi">Hà Nội</button>
-    <button class="city-btn" data-city="Haiphong">Hải Phòng</button>
-    <button class="city-btn" data-city="Ho Chi Minh">TP HCM</button>
-    <button class="city-btn" data-city="Hai Duong">Hải Dương</button>
-  </div>
+      <!-- Weather -->
+      <div class="card">
+        <h2 id="name">--</h2>
+        <img id="icon" src="" alt="weather icon" />
+        <h3 id="temp">--°C</h3>
+        <p id="desc">--</p>
+        <p id="feels">--</p>
+      </div>
 
-  <!-- Weather -->
-  <div class="card">
-    <h2 id="name">--</h2>
-    <img id="icon" src="" alt="weather icon"/>
-    <h3 id="temp">--°C</h3>
-    <p id="desc">--</p>
-    <p id="feels">--</p>
-  </div>
+      <!-- 🔥 Forecast (đặt đúng vị trí) -->
+      <div id="forecast" class="forecast"></div>
+    </div>
 
-  <!-- 🔥 Forecast (đặt đúng vị trí) -->
-  <div id="forecast" class="forecast"></div>
-
-</div>
-
-<script src="main.js"></script>
-
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>

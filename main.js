@@ -13,6 +13,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   setInterval(updateClock, 1000);
 
+  // ================= BACKGROUND =================
+  function setBackground(type) {
+  document.body.className = "";
+  document.body.classList.add(type);
+}
+
+  // ================= UI =================
+  function setWeatherUI(iconCode, isNight) {
+    removeRain();
+
+    if (iconCode.includes("01")) {
+      setBackground(isNight ? "night" : "sunny");
+    }
+    else if (iconCode.includes("02")) {
+      setBackground("partly");
+    }
+    else if (iconCode.includes("03") || iconCode.includes("04")) {
+      setBackground("cloudy");
+    }
+    else if (iconCode.includes("09") || iconCode.includes("10")) {
+      setBackground("rainy");
+   
+    }
+    else if (iconCode.includes("11")) {
+      setBackground("storm");
+    
+    }
+    else if (iconCode.includes("50")) {
+      setBackground("cloudy");
+    }
+  }
+
   // ================= WEATHER =================
   async function getWeather(city) {
     try {
@@ -25,6 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
       getForecast(city);
     } catch {
       alert("Lỗi tải dữ liệu!");
+    }
+  }
+
+  async function getWeatherByCoords(lat, lon) {
+    try {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=vi`
+      );
+      const data = await res.json();
+
+      displayWeather(data);
+      getForecast(data.name);
+    } catch {
+      alert("Lỗi vị trí!");
     }
   }
 
@@ -43,43 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
       "Feels like: " + Math.round(data.main.feels_like) + "°C";
 
     const iconCode = data.weather[0].icon;
-    const weather = data.weather[0].main.toLowerCase();
+
+// ✅ THÊM DÒNG NÀY ĐÚNG CHỖ
+document.getElementById("icon").src =
+  `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+
+    // 🔥 FIX ngày / đêm chuẩn theo API
     const isNight = iconCode.includes("n");
 
-    setWeatherUI(weather, isNight);
+    setWeatherUI(iconCode, isNight);
   }
 
-  // ================= UI =================
-  function setWeatherUI(weather, isNight) {
-    const icon = document.getElementById("icon");
-    const body = document.body;
-
-    body.className = "";
-    removeRain();
-
-    if (weather.includes("clear")) {
-      icon.src = isNight
-        ? "https://img.icons8.com/fluency/96/full-moon.png"
-        : "https://img.icons8.com/fluency/96/sun.png";
-      body.classList.add(isNight ? "night" : "sunny");
-    } else if (weather.includes("cloud")) {
-      icon.src = "https://img.icons8.com/fluency/96/cloud.png";
-      body.classList.add("cloudy");
-    } else if (weather.includes("rain")) {
-      icon.src = "https://img.icons8.com/fluency/96/rain.png";
-      body.classList.add("rainy");
-      createRain();
-    } else if (weather.includes("thunder")) {
-      icon.src = "https://img.icons8.com/fluency/96/storm.png";
-      body.classList.add("storm");
-      createRain();
-    } else {
-      icon.src =
-        "https://img.icons8.com/fluency/96/partly-cloudy-day.png";
-    }
-  }
-
-  // ================= FORECAST PRO =================
+  // ================= FORECAST =================
   async function getForecast(city) {
     try {
       const res = await fetch(
@@ -148,33 +169,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   locationBtn.addEventListener("click", () => {
-    navigator.geolocation.getCurrentPosition(async (pos) => {
+    navigator.geolocation.getCurrentPosition((pos) => {
       const { latitude, longitude } = pos.coords;
-
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=vi`
-      );
-      const data = await res.json();
-
-      displayWeather(data);
-      getForecast(data.name);
+      getWeatherByCoords(latitude, longitude);
     });
   });
 
   document.querySelectorAll(".city-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+      document.querySelectorAll(".city-btn")
+        .forEach(b => b.classList.remove("active"));
+
+      btn.classList.add("active");
+
       const city = btn.getAttribute("data-city");
       getWeather(city);
     });
   });
 
+  // default
   getWeather("Hanoi");
-});
-document.querySelectorAll(".city-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".city-btn")
-      .forEach(b => b.classList.remove("active"));
-
-    btn.classList.add("active");
-  });
 });
